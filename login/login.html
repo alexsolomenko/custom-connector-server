@@ -1,0 +1,29 @@
+<html lang="en" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body style="font-family: segoe Ui; font-size: 10pt;">
+	<script>{{options}}</script>
+	<script type="text/javascript" src="login.js"></script>
+
+	<form name="login" onsubmit="onFormSubmit(event)">
+		<h2>Sign in</h2>
+
+		<div>Username </div>
+		<div style="text-indent: 0em;">
+			<input type="text" name="username" required="required" /> 
+		</div>
+		<div></div>
+		
+		<div>Password </div>
+		<div style="text-indent: 0em;">
+			<input type="password" name="password" required="required" /> 
+		</div>
+		<p> 
+			<button id="login_button" type="submit" name="login" value="true">Log in</button>
+		</p>
+	</form>
+</body>
+
+</html>
