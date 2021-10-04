@@ -88,10 +88,10 @@ export var HTTP_STATUS = {
 
 export interface Client {
 	id: string;
-	name: string;
+	name?: string;
 	redirectUris?: string[] | undefined;
 	grants: string[];
-	secretKey: string;
+	secretKey?: string;
 	[key: string]: any;
 }
 
@@ -111,5 +111,6 @@ export interface Token {
 export interface IOAuthModel {
 	getClient(clientID: string, scope: string): Promise<Client>;
 	getLoginPage(client: Client): string;
-	getUser(client: Client): Promise<User>;
+	getUser(client: Client, username?: string, password?: string): Promise<User>;
+	getAccessToken(code: string, redirect_uri: string): Promise<Token>;
 }

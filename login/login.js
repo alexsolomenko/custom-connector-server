@@ -4,9 +4,9 @@ function onFormSubmit(e) {
 	e.preventDefault();
 
 	var form = document.forms.login;
-	data = { username: form.username.value, password: form.password.value, clientid: options.client_id };
+	data = { 'username': form.username.value, 'password': form.password.value, 'options': options };
 
-	fetch("/login", {
+	fetch("/login?response_type=login", {
 		method: 'POST',
 		mode: 'same-origin', // no-cors, *cors, same-origin
 		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -18,5 +18,9 @@ function onFormSubmit(e) {
 		redirect: 'follow', // manual, *follow, error
 		referrerPolicy: 'no-referrer', // no-referrer, *client
 		body: JSON.stringify(data) // body data type must match "Content-Type" header
-	  }).then(ressponse => window.location.href = '/');
+	}).then(response => {
+		console.log("redirected: " + response.redirected);
+		if (response.redirected)
+			window.location.href = response.url;
+	});
 }

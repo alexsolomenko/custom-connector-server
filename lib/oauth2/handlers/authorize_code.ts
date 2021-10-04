@@ -75,14 +75,17 @@ export class AuthorizationCode {
 					if (error)
 						reject(error);
 					else {
-						console.log('headers sent: ' + that.response.headersSent);
 						that.response.status(200);
 						that.response.setHeader('Content-Type', 'text/html');
-						let options = `var options = ${JSON.stringify({ 
-							'client_id': client.id, 
-							//'redirect_uri': client['redirect_uri'],
-							'login_uri': environment.loginUrn })}`; 
-						that.response.send(data.replace("{{options}}", options));
+
+						let options = {
+							'id': client.id, 
+							'scope': client[OAUTH_PROP.scope],
+							'state': client[OAUTH_PROP.state],
+							'redirect_uri': client[OAUTH_PROP.redirectUri],
+							'login_uri': environment.loginUrn
+						};
+						that.response.send(data.replace("{{options}}", `var options = ${JSON.stringify(options)}`));
 						resolve(undefined);
 					}
 				});

@@ -13,7 +13,7 @@ export class AuthData {
 			id: 'e652c8cc-0536-451f-b6b7-d765690fdc9c',
 			name: 'Power Automate',
 			secretKey: '_',
-			redirectUris: [environment.hostUrl + environment.tokenUrn, 'https://global.consent.azure-apim.net/redirect'], 
+			redirectUris: [environment.hostUrl + environment.testUrn, 'https://global.consent.azure-apim.net/redirect'], 
 			grants: ['authorization_code'],
 		}
 	];
@@ -21,8 +21,8 @@ export class AuthData {
 	private users: User[] = [ 
 		// test users
 		// pass is MD5 hash
-		{ name: 'user1', pass: '202cb962ac59075b964b07152d234b70' }, 
-		{ name: 'user2', pass: '250cf8b51c773f3f8dc8b4be867a9a02' }
+		{ name: 'user1', pass: '123456' }, 
+		{ name: 'user2', pass: '456789' }
 	];
 
 	private tokens: Token[] = [];
@@ -52,7 +52,7 @@ export class AuthData {
 				// TODO also need to check the scope
 				if (!token)
 					token = {
-						accessToken: this.md5(`${client.id}-${user.id}-${scope.join(',')}-${new Date().valueOf()}`),
+						accessToken: this.md5(`${client.id}-${user.id}-${(Array.isArray(scope) ? scope.join(',') : scope)}-${new Date().valueOf()}`),
 						accessTokenExpiresAt: undefined,
 						refreshToken: undefined,
 						refreshTokenExpiresAt: undefined,
