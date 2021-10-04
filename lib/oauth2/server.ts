@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { Utils } from "./utils";
 import { IOAuthModel, RESPONSE_TYPE } from "./entities";
 import { OAuthErrors } from "./errors";
-import { AuthorizationCode } from "../handlers/authorize_code";
+import { AuthorizationCode } from "./handlers/authorize_code";
 
 export class OAuth2Server {
 	model: IOAuthModel;

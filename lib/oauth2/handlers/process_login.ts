@@ -1,4 +1,4 @@
-import { IOAuthModel } from "../oauth2/entities";
+import { IOAuthModel } from "../entities";
 
 export class AuthenticateUser {
 	request: Request = undefined;

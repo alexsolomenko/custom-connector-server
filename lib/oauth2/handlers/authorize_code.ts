@@ -1,9 +1,9 @@
-import { Client, GRANT_TYPE, IOAuthModel, OAUTH_PROP } from "../oauth2/entities";
-import { OAuthErrors } from "../oauth2/errors";
-import { Utils } from "../oauth2/utils";
+import { Client, GRANT_TYPE, IOAuthModel, OAUTH_PROP } from "../entities";
+import { OAuthErrors } from "../errors";
+import { Utils } from "../utils";
 import { Request, Response } from "express";
-import { environment } from "../../environments/environment";
-import { Is } from "../oauth2/validators";
+import { environment } from "../../../environments/environment";
+import { Is } from "../validators";
 
 export class AuthorizationCode {
 	request: Request = undefined;
