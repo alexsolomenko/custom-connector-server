@@ -7,6 +7,7 @@ export enum GRANT_TYPE {
 
 export enum RESPONSE_TYPE {
 	code = "code",
+	login = "login",
 	token = "token"
 }
 

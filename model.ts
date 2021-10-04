@@ -12,7 +12,6 @@ export class TestAuthModel implements IOAuthModel {
 	}
 
 	getLoginPage(client: Client): string {
-		//return __dirname + "\\login.html";
 		return "./login/login.html";
 	}
 
