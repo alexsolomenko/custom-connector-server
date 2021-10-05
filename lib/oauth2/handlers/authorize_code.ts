@@ -70,6 +70,7 @@ export class AuthorizationCode {
 		if (loginPage) {
 			let that = this;
 			return new Promise((resolve, reject) => {
+				//this.response.redirect(302, `${loginPage}?client_id=${client.id}&redirect_uri=${client[OAUTH_PROP.redirectUri]}&scope=${client[OAUTH_PROP.scope]}&state=${client[OAUTH_PROP.state]}`);
 				let fs = require('fs');
 				fs.readFile(loginPage, 'utf-8', function(error: any, data: any) {
 					if (error)
@@ -79,7 +80,7 @@ export class AuthorizationCode {
 						that.response.setHeader('Content-Type', 'text/html');
 
 						let options = {
-							'id': client.id, 
+							'client_id': client.id, 
 							'scope': client[OAUTH_PROP.scope],
 							'state': client[OAUTH_PROP.state],
 							'redirect_uri': client[OAUTH_PROP.redirectUri],
