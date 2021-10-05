@@ -12,12 +12,13 @@ var app = express();
 
 app.use([environment.authUrn, environment.tokenUrn, environment.loginUrn], bodyParser.json());
 app.use([environment.authUrn, environment.tokenUrn, environment.loginUrn], bodyParser.urlencoded({ extended: false }));
+
 app.use(express.static('login'))
 
 app.get(environment.authUrn, server.authorizeCode);
 app.post(environment.loginUrn, server.processLogin);
 app.post(environment.tokenUrn, server.authorizeAccessToken);
 
-app.get(environment.testUrn, server.processTest);
+app.get([environment.testUrn, /\/api/], server.processTest);
 
 app.listen(3000);

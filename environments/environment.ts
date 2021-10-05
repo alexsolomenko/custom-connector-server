@@ -5,5 +5,7 @@ export const environment = {
   loginUrn: '/login',
   usersUrn: '/users', //external
   tokenUrn: '/token', //external
-  testUrn: '/test'
+
+  testUrn: '/test',
+  apiUrn: '/api'
 };
