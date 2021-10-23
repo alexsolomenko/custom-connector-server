@@ -1,0 +1,68 @@
+{
+	"clients": [
+		{
+			"id": "e652c8cc-0536-451f-b6b7-d765690fdc9c",
+			"name": "Power Automate",
+			"secretKey": "_",
+			"redirectUris": [
+				"http://localhost:3000/test",
+				"https://global.consent.azure-apim.net/redirect"
+			],
+			"grants": [
+				"authorization_code"
+			]
+		}
+	],
+	"users": [
+		{
+			"name": "user1",
+			"pass": "123456"
+		},
+		{
+			"name": "user2",
+			"pass": "456789"
+		}
+	],
+	"tokens": [
+		{
+			"accessToken": "3267c9670a45c25acb941c6892e49c06",
+			"scope": "user.read",
+			"client": {
+				"id": "e652c8cc-0536-451f-b6b7-d765690fdc9c",
+				"name": "Power Automate",
+				"secretKey": "_",
+				"redirectUris": [
+					"http://localhost:3000/test",
+					"https://global.consent.azure-apim.net/redirect"
+				],
+				"grants": [
+					"authorization_code"
+				]
+			},
+			"user": {
+				"name": "user1",
+				"pass": "123456"
+			}
+		},
+		{
+			"accessToken": "626db18dd6ca91a402fd196d74a40123",
+			"scope": "user.read",
+			"client": {
+				"id": "e652c8cc-0536-451f-b6b7-d765690fdc9c",
+				"name": "Power Automate",
+				"secretKey": "_",
+				"redirectUris": [
+					"http://localhost:3000/test",
+					"https://global.consent.azure-apim.net/redirect"
+				],
+				"grants": [
+					"authorization_code"
+				]
+			},
+			"user": {
+				"name": "user2",
+				"pass": "456789"
+			}
+		}
+	]
+}

@@ -29,7 +29,7 @@ export class TestAuthModel implements IOAuthModel {
 
 	getAccessToken(code: string, redirect_uri: string): Promise<Token> {
 		return new Promise((resolve, reject) => {
-			let token = AuthData.instance.getAccessToken(code);
+			let token = AuthData.instance.getAccessToken(code, true);
 			if (token)
 				resolve(token);
 			else

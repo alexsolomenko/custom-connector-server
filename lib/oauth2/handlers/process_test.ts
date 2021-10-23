@@ -2,6 +2,7 @@ import { IOAuthModel } from "../entities";
 import { Request, Response } from "express";
 import { environment } from "../../../environments/environment";
 import fetch from 'node-fetch';
+import { AuthData } from "../../../auth_data";
 
 export class ProcessTest {
 	request: Request = undefined;
@@ -36,19 +37,26 @@ export class ProcessTest {
 	}
 
 	getTemplate(query: any) {
-		let name = query.id;
+		let id = query.id;
 		let subject = query.subject;
-		console.log(`${name} ${subject}`);
+		let authorization: string = this.request.headers.authorization;
+		
+		console.log(`authorization: ${authorization}`);
+		let user = AuthData.instance.getUserByToken(authorization.split(/\s+/)[1]);
+		console.log(`${user ? user.name : 'undefined'}.getTemplate id: ${id}`);
 
 		this.response.status(200);
 		this.response.contentType('application/json');
 		this.response.setHeader('Access-Control-Allow-Origin', '*');
-		switch(name) {
+		switch(id) {
 			case "1": 
 				this.response.send(JSON.stringify({'template': 'I greately appreciate your kind words.'}) );
 			break;
 			case "2": 
 				this.response.send(JSON.stringify({'template': 'I am very thankful for your kind help.'}) );
+			break;
+			case "3": 
+				this.response.send(JSON.stringify({'template': '<h2 style="color: red;font-family: monospace;">I am very thankful for your kind help.</h2>'}) );
 			break;
 			default:
 				this.response.send('');
