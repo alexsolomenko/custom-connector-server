@@ -1,10 +1,11 @@
-import { IOAuthModel } from "../entities";
+import { IOAuthModel } from "../lib/oauth2/entities";
 import { Request, Response } from "express";
-import { environment } from "../../../environments/environment";
+import { environment } from "../environments/environment";
 import fetch from 'node-fetch';
-import { AuthData } from "../../../auth_data";
+import { AuthData } from "./auth_data";
+import { OAuthErrors } from "../lib/oauth2/errors";
 
-export class ProcessTest {
+export class TestAPI {
 	request: Request = undefined;
 	response: Response = undefined;
 	model: IOAuthModel;
@@ -18,8 +19,9 @@ export class ProcessTest {
 	handle(): Promise<any> {
 		if (this.request.originalUrl.startsWith(environment.apiUrn)) {
 			let func = this.request.path.substr(environment.apiUrn.length + 1);
+			const query = this.request.query;
 			if (func && func.toLowerCase() == 'gettemplate')
-				this.getTemplate(this.request.query);
+				this.getTemplate(query);
 			return Promise.resolve();
 		}
 		else {
@@ -42,6 +44,9 @@ export class ProcessTest {
 		let authorization: string = this.request.headers.authorization;
 		
 		console.log(`authorization: ${authorization}`);
+		if (!authorization)
+			throw OAuthErrors.UnauthorizedClient();
+
 		let user = AuthData.instance.getUserByToken(authorization.split(/\s+/)[1]);
 		console.log(`${user ? user.name : 'undefined'}.getTemplate id: ${id}`);
 
@@ -56,7 +61,7 @@ export class ProcessTest {
 				this.response.send(JSON.stringify({'template': 'I am very thankful for your kind help.'}) );
 			break;
 			case "3": 
-				this.response.send(JSON.stringify({'template': '<h2 style="color: red;font-family: monospace;">I am very thankful for your kind help.</h2>'}) );
+				this.response.send(JSON.stringify({'template': '<h2 style="color: red;font-family: monospace;">I\'m very thankful for your kind help.</h2>'}) );
 			break;
 			default:
 				this.response.send('');

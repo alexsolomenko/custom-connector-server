@@ -5,7 +5,6 @@ import { OAuthErrors } from "./errors";
 import { AuthorizationCode } from "./handlers/authorize_code";
 import { AuthorizationToken } from "./handlers/authorize_token";
 import { ProcessLogin } from "./handlers/process_login";
-import { ProcessTest } from "./handlers/process_test";
 
 export class OAuth2Server {
 	model: IOAuthModel;
@@ -32,9 +31,5 @@ export class OAuth2Server {
 			return new AuthorizationToken(req, res, this.model).handle().catch(err => next(err));
 		else
 			return next(OAuthErrors.UnsupportedGrandType);
-	}
-
-	processTest = (req: Request, res: Response, next: any): Promise<any> => {
-		return new ProcessTest(req, res, this.model).handle().catch(err => next(err));
 	}
 }

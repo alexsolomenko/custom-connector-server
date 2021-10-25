@@ -1,9 +1,9 @@
-import { environment } from "./environments/environment";
-import { Client, Token, User } from "./lib/oauth2/entities";
+import { environment } from "../environments/environment";
+import { Client, Token, User } from "../lib/oauth2/entities";
 
 export class AuthData {
-	private dataFile: string = 'data.json';
-	static instance: AuthData = new AuthData();
+	private dataFile: string = './test/data.json';
+	static _instance: AuthData = undefined;
 
 	private md5 = require('md5');
 	private clients: Client[] = undefined;
@@ -22,7 +22,6 @@ export class AuthData {
 
 			fs.readFile(that.dataFile, "utf8", (error, data ) => {
                 if(error) throw error;
-
 				let obj = JSON.parse(data);
 				if (obj) {
 					that.clients = obj.clients;
@@ -67,6 +66,12 @@ export class AuthData {
 			}
 		}
 	}
+
+	static get instance() {
+		if (!this._instance)
+			this._instance = new AuthData();
+        return this._instance;
+    }
 
 	getClient(clientId: string): Client {
 		return this.clients.find(c => c.id == clientId);

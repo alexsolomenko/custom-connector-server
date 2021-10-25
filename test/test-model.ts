@@ -1,8 +1,12 @@
 import { AuthData } from "./auth_data";
-import { IOAuthModel, Client, User, Token } from "./lib/oauth2/entities";
-import { OAuthErrors } from "./lib/oauth2/errors";
+import { IOAuthModel, Client, User, Token } from "../lib/oauth2/entities";
+import { OAuthErrors } from "../lib/oauth2/errors";
 
 export class TestAuthModel implements IOAuthModel {
+	constructor() {
+		AuthData.instance;  //init test data
+	}
+
 	getClient(clientId: string, scope: string): Promise<Client> {
 		console.log(`model.getClient: ${clientId}`);
 		let client = AuthData.instance.getClient(clientId);
