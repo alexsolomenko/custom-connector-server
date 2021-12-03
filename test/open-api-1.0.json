@@ -1,0 +1,103 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "test",
+        "description": "TestConnector",
+        "version": "1.0"
+    },
+    "host": "ablebits-connector.loca.lt",
+    "basePath": "/api",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [],
+    "produces": [],
+    "paths": {
+        "/getTemplate": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Template ID",
+                        "required": true,
+                        "type": "string",
+                        "x-ms-summary": "Enter template id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "template": {
+                                    "type": "string",
+                                    "description": "template",
+                                    "title": "",
+                                    "format": "html"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Get Template by name",
+                "description": "Get Template by name",
+                "operationId": "getTemplate"
+            }
+        },
+        "/getTreeList": {
+            "get": {
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "parentID",
+                        "in":"query",
+                        "description": "Parent ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "summary": "Get tree node list",
+                "description": "Get tree node list",
+                "operationId": "getTreeList"
+            }
+        }
+    },
+    "definitions": {},
+    "parameters": {},
+    "responses": {},
+    "securityDefinitions": {
+        "oauth2_auth": {
+            "type": "oauth2",
+            "flow": "accessCode",
+            "authorizationUrl": "https://ablebits-connector.loca.lt/auth",
+            "tokenUrl": "https://ablebits-connector.loca.lt/token",
+            "scopes": {
+                "user.read": "user.read"
+            }
+        }
+    },
+    "security": [
+        {
+            "oauth2_auth": [
+                "user.read"
+            ]
+        }
+    ],
+    "tags": []
+}
